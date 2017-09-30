@@ -1,0 +1,11 @@
+# gitea logs:
+/var/log/gitea/*.log {
+  daily
+  missingok
+  rotate 14
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}
+
