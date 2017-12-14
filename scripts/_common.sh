@@ -30,12 +30,12 @@ GITEA_BINARY_URL="https://dl.gitea.io/${APPNAME}/${VERSION}/${APPNAME}-${VERSION
 # usage: install_gitea DESTDIR
 install_gitea() {
   local DESTDIR=$1
-  
+
   # Retrieve Gitea binary
   gitea_binary="/tmp/gitea"
-  rm -f "gitea_binary"
+  rm -f "$gitea_binary"
   wget -q -O "$gitea_binary" "$GITEA_BINARY_URL" \
     || ynh_die "Unable to download Gitea binary"
-  sudo rsync -a "/tmp/gitea" "$DESTDIR"
-  rm -rf "$gitea_binary" "${TMPDIR:-/tmp/fakefile}"
+  sudo chmod +x "$gitea_binary"
+  sudo rsync -a "$gitea_binary" "$DESTDIR"
 }

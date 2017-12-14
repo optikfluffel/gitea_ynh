@@ -73,6 +73,11 @@ sudo sed -i "s@yuno_dbuser@$dbuser@g" "$DESTDIR"/custom/conf/app.ini
 sudo sed -i "s@yuno_domain@$domain@g" "$DESTDIR"/custom/conf/app.ini
 sudo sed -i "s@yuno_key@$key@g" "$DESTDIR"/custom/conf/app.ini
 sudo sed -i "s@yuno_data_path@$DATA_PATH@g" "$DESTDIR"/custom/conf/app.ini
+# Check Gitea default port
+port=$(ynh_find_port 6000)
+# Configure with available port
+sudo sed -i "s@yuno_port@$port@g" "$DESTDIR"/custom/conf/app.ini
+sudo sed -i "s@yuno_port@$port@g" ../conf/nginx.conf
 
 # Configure logrotate
 sudo cp ../conf/logrotate /etc/logrotate.d/"$app"
